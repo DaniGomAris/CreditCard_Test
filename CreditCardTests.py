@@ -1,8 +1,7 @@
 # Todas las prueba sunitarias importan la biblioteca unittest
 import unittest
 # Las pruebas importan los modulos que hacen el trabajo
-from Payment import *
-
+import Payment
 
 # Debe existir por lo menos una clase que contenga las pruyebas unitarias
 # descediente de unittest.TestCase
@@ -16,7 +15,7 @@ class CreditCardTest(unittest.TestCase):
         tasa = 3.1
         plazo = 36
         cuota = 9297.96
-        resultado = Payment.calcularCuota( compra, tasa, plazo )
+        resultado = Payment.calcularCuota( compra, tasa, plazo)
         # Prueba que dos variables sean iguales
         self.assertEqual(cuota, round(resultado,2))
 
@@ -25,7 +24,7 @@ class CreditCardTest(unittest.TestCase):
         tasa = 3.4
         plazo = 24
         cuota = 52377.5
-        resultado = Payment.calcularCuota(compra, tasa, plazo       )
+        resultado = Payment.calcularCuota(compra, tasa, plazo)
         self.assertEqual(cuota, round(resultado,2))
 
     def Zero_rate(self):
@@ -53,18 +52,7 @@ class CreditCardTest(unittest.TestCase):
         except Payment.TasaExcesiva  :
             pass 
 
-
-    def Single_fee(self):
-        """  Compra a una sola cuota """
-        compra = 90000
-        tasa = 2.4
-        plazo = 1
-        cuota = 90000
-        resultado = Payment.calcularCuota( compra, tasa, plazo )
-        self.assertEqual(cuota, round(resultado,2))
-
-
-    def testPayment3_v2(self):
+    def Usura_v2(self):
         """ Compra con tasa excesiva """
         compra = 50000
         tasa = 12.4
@@ -75,6 +63,27 @@ class CreditCardTest(unittest.TestCase):
         # el segundo es el metodo que se va a invocar
         # y los demas parametros son los parametros del metodo bajo prueba
         self.assertRaises(Payment.TasaExcesiva,  Payment.calcularCuota, compra, tasa, plazo)
+
+    def Single_fee(self):
+        """  Compra a una sola cuota """
+        compra = 90000
+        tasa = 2.4
+        plazo = 1
+        cuota = 90000
+        resultado = Payment.calcularCuota(compra, tasa, plazo)
+        self.assertEqual(cuota, round(resultado,2))
+
+    def Buy_error(self):
+        compra = 0
+        tasa = 2.4
+        cuota = 60
+        pass
+
+    def Negative_error(self):
+        compra = 50000
+        tasa = 1
+        cuota = -10
+        pass
 
 # Este fragmento de codigo permite ejecutar la prueb individualmente
 # Va fijo en todas las pruebas

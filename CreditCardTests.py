@@ -39,7 +39,7 @@ class CreditCardTest(unittest.TestCase):
         try:
             resultado = Payment.CalculateFee(monto, tasa, cuotas)
             self.assertEqual(resultado, 0)
-        except Payment.TasaExcesiva  :
+        except Payment.ExcessiveRate :
             pass 
 
     def Usura_v2(self):
@@ -47,7 +47,7 @@ class CreditCardTest(unittest.TestCase):
         tasa = 12.4
         cuotas = 60
 
-        self.assertRaises(Payment.TasaExcesiva,  Payment.CalculateFee, monto, tasa, cuotas)
+        self.assertRaises(Payment.ExcessiveRate,  Payment.CalculateFee, monto, tasa, cuotas)
 
     def Single_fee(self):
         monto = 90000

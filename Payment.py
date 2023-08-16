@@ -1,40 +1,24 @@
-# Exepcion personalizada que se usa en un caso de error particular
-class TasaExcesiva(Exception): 
+class ExcessiveRate(Exception): 
     pass
 
-class BuyError(Exception):
+class NegativeShare(Exception):
     pass
 
-class ZeroError(Exception):
+class ZeroAmount(Exception):
     pass
 
-def calcularCuota(compra,tasa,plazo):
-    """
-    Calcula la cuota a pagar por una compra con una tarjeta de crédito
-    compra : Valor de la compra con la tarjeta
-    tasa : Debe ser un porcentaje entre 1 y 100
-    plazo : numero de cuotas a diferir la compra
-
-    El resultado no esta redondeado
-    """
-
+def CalculateFee(monto,tasa,cuotas):
+    p =  tasa / 100
+    if monto == 0:
+        raise ZeroAmount("El monto es 0")
     if tasa*12 > 100 :
-        """ Si la tasa anual es mayor que 100, arroja una excepcion """
-        raise TasaExcesiva( "La tasa no debe ser superior a 100" )
-
-    if plazo == 1 :
-        """ Cuando el plazo sea una sola cuota, no se aplican intereses """
-        return compra
-
-    """ La tasa de interés está expresada como un entero entre 1 y 100 """
-    i =  tasa / 100
- 
+        raise ExcessiveRate("La tasa no debe ser superior a 100")
+    if cuotas <= 0:
+        raise NegativeShare("Las cuotas son menores o iguales a 0")
+    if cuotas == 1 :
+        return monto
     if tasa == 0:
-        """ 
-        Cuando la tasa sea cero, la cuota es la compra dividida las cuotas
-        para evitar error de division por cero 
-        """
-        return compra / plazo
+        return monto / cuotas
     else:         
-        return (compra * i) / (1 - (1 + i) ** (-plazo))
+        return (monto * p) / (1 - (1 + p) ** (-cuotas))
     

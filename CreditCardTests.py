@@ -1,6 +1,5 @@
 import unittest
 import Payment
-import Amortizacion
 
 class CreditCardTest(unittest.TestCase):
 
@@ -9,7 +8,7 @@ class CreditCardTest(unittest.TestCase):
         tasa = 3.1
         cuotas = 36
         cuota = 9297.96
-        resultado = Payment.CalculateFee( monto, tasa, cuotas)
+        resultado = Payment.CalculateFee(monto, tasa, cuotas)
 
         self.assertEqual(cuota, round(resultado,2))
 
@@ -62,13 +61,15 @@ class CreditCardTest(unittest.TestCase):
         monto = 0
         tasa = 2.4
         cuotas = 60
-        pass
+
+        self.assertRaises(Payment.ZeroAmount, Payment.CalculateFee, monto, tasa, cuotas)
 
     def Negative_error(self):
         monto = 50000
         tasa = 1
         cuotas = -10
-        pass
+
+        self.assertRaises(Payment.NegativeShare, Payment.CalculateFee, monto, tasa, cuotas)
 
 if __name__ == '__main__':
     unittest.main()

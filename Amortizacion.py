@@ -1,12 +1,12 @@
-import CreditCardTests
+import Payment
 
 def Total_Interest(monto,tasa,cuotas):
-    valor_cuota = CreditCardTests.CalculateFee(monto, tasa, cuotas)
+    valor_cuota = Payment.CalculateFee(monto, tasa, cuotas)
     total_intereses = (valor_cuota * cuotas) - monto
     return total_intereses
 
 def Amortizacion(monto, tasa, cuotas):
-    valor_cuota = CreditCardTests.CalculateFee(monto, tasa, cuotas)
+    valor_cuota = Payment.CalculateFee(monto, tasa, cuotas)
     print(valor_cuota)
     interes_x = tasa/100
     saldo = monto

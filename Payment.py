@@ -7,6 +7,12 @@ class NegativeShare(Exception):
 class ZeroAmount(Exception):
     pass
 
+class LowBonus(Exception):
+    pass
+
+class HighBonus(Exception):
+    pass
+
 def CalculateFee(monto,tasa,cuotas):
     p =  tasa / 100
     if monto == 0:

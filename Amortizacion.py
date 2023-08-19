@@ -30,8 +30,8 @@ def Amortizacion(monto, tasa, cuotas):
 
     return tabla_amortizacion
 
-monto = 8500002
-cuotas = 25
-tasa_interes = 3.7
+monto = 850000
+cuotas = 24
+tasa_interes = 3.4
 
 print(Amortizacion(monto, tasa_interes, cuotas))

@@ -18,32 +18,31 @@ Menu
         self.menu_option()
         eleccion = int(input("Opcion: "))
 
-        while eleccion != 4:
-            if eleccion == 1:
-                self.calculateFee_option()
+        if eleccion == 1:
+            self.calculateFee_option()
 
-            if eleccion == 2:
-                self.amortizacion_option()
+        if eleccion == 2:
+            self.amortizacion_option()
 
-            if eleccion == 3:
-                self.extra_bonus_option()
+        if eleccion == 3:
+            self.extra_bonus_option()
 
-            if eleccion == 4:
-                sys.exit()
+        if eleccion == 4:
+            sys.exit()
 
     def calculateFee_option(self):
         monto = float(input("Monto a pagar: "))
         tasa = float(input("Tasa actual: "))
         cuotas = int(input("Cúantas cuotas pagará el monto: "))
         print(f"Total interests: {Payment.calculateFee(monto,tasa,cuotas)}")
-        self.menu_option()
+        self.election_option()
         
     def amortizacion_option(self):
         monto = float(input("Monto a pagar: "))
         tasa = float(input("Tasa actual: "))
         cuotas = int(input("Cúantas cuotas pagará el monto: "))
         print(Amortizacion.amortizacion(monto,tasa,cuotas))
-        self.menu_option()
+        self.election_option()
         
     def extra_bonus_option(self):
         monto = float(input("Monto a pagar: "))
@@ -52,4 +51,4 @@ Menu
         numero_cuota_a_abonar = int(input("Qué cuota va a hacer un abono extra: "))
         abonoextra = float(input("Cúanto será el abono extra: "))
         print(ExtraBonus.amortizacion_extra_bonus(monto,tasa,cuotas,numero_cuota_a_abonar,abonoextra))
-        self.menu_option()
+        self.election_option()

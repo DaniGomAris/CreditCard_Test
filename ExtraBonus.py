@@ -1,12 +1,12 @@
 import Payment
 
 def interes_total(monto,tasa,cuotas):
-    valor_cuota = Payment.CalculateFee(monto, tasa, cuotas)
+    valor_cuota = Payment.calculateFee(monto, tasa, cuotas)
     total_intereses = (valor_cuota * cuotas) - monto
     return total_intereses
 
 def amortizacion_extra_bonus(monto, tasa, cuotas,numero_cuota_a_abonar,abonoextra):
-    valor_cuota = Payment.CalculateFee(monto, tasa, cuotas)
+    valor_cuota = Payment.calculateFee(monto, tasa, cuotas)
     print(valor_cuota)
     interes_x = tasa/100
     saldo = monto
@@ -19,14 +19,12 @@ def amortizacion_extra_bonus(monto, tasa, cuotas,numero_cuota_a_abonar,abonoextr
         tabla_amortizacion.append(fila)
     else:
         for cuota in range(1, cuotas + 1):
-            
-            
             if saldo <=0:
                 break
 
             numero_cuota = cuota
             interes = interes_x * saldo
-
+            
             if numero_cuota_a_abonar == numero_cuota:
                 cuota_real_a_abonar = abonoextra
             else:
@@ -52,11 +50,3 @@ def amortizacion_extra_bonus(monto, tasa, cuotas,numero_cuota_a_abonar,abonoextr
                 abono_capital = saldo
 
     return tabla_amortizacion
-
-monto = 200000
-cuotas = 36
-tasa_interes = 3.1
-numero_cuota_a_abonar = 10
-abonoextra = 53000
-
-print(amortizacion_extra_bonus(monto, tasa_interes, cuotas,numero_cuota_a_abonar,abonoextra))

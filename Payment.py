@@ -13,7 +13,7 @@ class LowBonus(Exception):
 class HighBonus(Exception):
     pass
 
-def CalculateFee(monto,tasa,cuotas):
+def calculateFee(monto,tasa,cuotas):
     p =  tasa / 100
     if monto == 0:
         raise ZeroAmount("El monto es 0")

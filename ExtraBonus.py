@@ -1,4 +1,5 @@
 import Payment
+import Exceptions
 
 def interes_total(monto,tasa,cuotas):
     valor_cuota = Payment.calculateFee(monto, tasa, cuotas)
@@ -24,7 +25,7 @@ def amortizacion_extra_bonus(monto, tasa, cuotas,numero_cuota_a_abonar,abonoextr
 
             numero_cuota = cuota
             interes = interes_x * saldo
-            
+
             if numero_cuota_a_abonar == numero_cuota:
                 cuota_real_a_abonar = abonoextra
             else:
@@ -34,10 +35,10 @@ def amortizacion_extra_bonus(monto, tasa, cuotas,numero_cuota_a_abonar,abonoextr
             saldo -= abono_capital
             
             if abonoextra < cuota_real_a_abonar:
-                raise Payment.LowBonus
+                raise Exceptions.LowBonus
             
             if abonoextra > saldo:
-                raise Payment.HighBonus
+                raise Exceptions.HighBonus
 
             if saldo < 0:
                 abono_capital += saldo + interes

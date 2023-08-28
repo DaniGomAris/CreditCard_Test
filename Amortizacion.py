@@ -1,4 +1,5 @@
 import Payment
+import Exceptions
 
 def total_Interest(monto,tasa,cuotas):
     valor_cuota = Payment.calculateFee(monto, tasa, cuotas)

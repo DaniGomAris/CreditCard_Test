@@ -1,9 +1,10 @@
 import unittest
 import Payment
+import Exceptions
 
 class CreditCardTest(unittest.TestCase):
 
-    def normal_Case(self):
+    def normal_case(self):
         monto = 200000
         tasa = 3.1
         cuotas = 36
@@ -12,7 +13,7 @@ class CreditCardTest(unittest.TestCase):
 
         self.assertEqual(cuota, round(resultado,2))
 
-    def normal_Case2(self):
+    def normal_case_2(self):
         monto = 850000
         tasa = 3.4
         cuotas = 24
@@ -38,7 +39,7 @@ class CreditCardTest(unittest.TestCase):
         try:
             resultado = Payment.calculateFee(monto, tasa, cuotas)
             self.assertEqual(resultado, 0)
-        except Payment.ExcessiveRate :
+        except Exceptions.ExcessiveRate :
             pass 
 
     def usura_v2(self):
@@ -46,7 +47,7 @@ class CreditCardTest(unittest.TestCase):
         tasa = 12.4
         cuotas = 60
 
-        self.assertRaises(Payment.ExcessiveRate,  Payment.calculateFee, monto, tasa, cuotas)
+        self.assertRaises(Exceptions.ExcessiveRate,  Payment.calculateFee, monto, tasa, cuotas)
 
     def single_fee(self):
         monto = 90000
@@ -62,14 +63,14 @@ class CreditCardTest(unittest.TestCase):
         tasa = 2.4
         cuotas = 60
 
-        self.assertRaises(Payment.ZeroAmount, Payment.calculateFee, monto, tasa, cuotas)
+        self.assertRaises(Exceptions.ZeroAmount, Payment.calculateFee, monto, tasa, cuotas)
 
     def negative_error(self):
         monto = 50000
         tasa = 1
         cuotas = -10
 
-        self.assertRaises(Payment.NegativeShare, Payment.calculateFee, monto, tasa, cuotas)
+        self.assertRaises(Exceptions.NegativeShare, Payment.calculateFee, monto, tasa, cuotas)
 
 if __name__ == '__main__':
     unittest.main()

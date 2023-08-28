@@ -5,6 +5,7 @@ import sys
 from abc import ABC
 
 class MenuConsole(ABC):
+    
     def menu_option(self):
         print("""
 Menu

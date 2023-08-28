@@ -14,4 +14,3 @@ def calculateFee(monto,tasa,cuotas):
         return monto / cuotas
     else:         
         return (monto * p) / (1 - (1 + p) ** (-cuotas))
-    

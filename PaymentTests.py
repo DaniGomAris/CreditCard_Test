@@ -9,7 +9,7 @@ class CreditCardTest(unittest.TestCase):
         tasa = 3.1
         cuotas = 36
         cuota = 9297.96
-        resultado = Payment.calculateFee(monto, tasa, cuotas)
+        resultado = Payment.CreditCardPayment.calculateFee(monto, tasa, cuotas)
 
         self.assertEqual(cuota, round(resultado,2))
 
@@ -18,7 +18,7 @@ class CreditCardTest(unittest.TestCase):
         tasa = 3.4
         cuotas = 24
         cuota = 52377.5
-        resultado = Payment.calculateFee(monto, tasa, cuotas)
+        resultado = Payment.CreditCardPayment.calculateFee(monto, tasa, cuotas)
 
         self.assertEqual(cuota, round(resultado,2))
 
@@ -27,7 +27,7 @@ class CreditCardTest(unittest.TestCase):
         tasa = 0
         cuotas = 48
         cuota = 10000
-        resultado = Payment.calculateFee(monto, tasa, cuotas)
+        resultado = Payment.CreditCardPayment.calculateFee(monto, tasa, cuotas)
 
         self.assertEqual(cuota, round(resultado,2))
 
@@ -37,7 +37,7 @@ class CreditCardTest(unittest.TestCase):
         cuotas = 60
 
         try:
-            resultado = Payment.calculateFee(monto, tasa, cuotas)
+            resultado = Payment.CreditCardPayment.calculateFee(monto, tasa, cuotas)
             self.assertEqual(resultado, 0)
         except Exceptions.ExcessiveRate :
             pass 
@@ -47,14 +47,14 @@ class CreditCardTest(unittest.TestCase):
         tasa = 12.4
         cuotas = 60
 
-        self.assertRaises(Exceptions.ExcessiveRate,  Payment.calculateFee, monto, tasa, cuotas)
+        self.assertRaises(Exceptions.ExcessiveRate,  Payment.CreditCardPayment.calculateFee, monto, tasa, cuotas)
 
     def single_fee(self):
         monto = 90000
         tasa = 2.4
         cuotas = 1
         cuota = 90000
-        resultado = Payment.calculateFee(monto, tasa, cuotas)
+        resultado = Payment.CreditCardPayment.calculateFee(monto, tasa, cuotas)
 
         self.assertEqual(cuota, round(resultado,2))
 
@@ -63,14 +63,14 @@ class CreditCardTest(unittest.TestCase):
         tasa = 2.4
         cuotas = 60
 
-        self.assertRaises(Exceptions.ZeroAmount, Payment.calculateFee, monto, tasa, cuotas)
+        self.assertRaises(Exceptions.ZeroAmount, Payment.CreditCardPayment.calculateFee, monto, tasa, cuotas)
 
     def negative_error(self):
         monto = 50000
         tasa = 1
         cuotas = -10
 
-        self.assertRaises(Exceptions.NegativeShare, Payment.calculateFee, monto, tasa, cuotas)
+        self.assertRaises(Exceptions.NegativeShare, Payment.CreditCardPayment.calculateFee, monto, tasa, cuotas)
 
 if __name__ == '__main__':
     unittest.main()

@@ -32,24 +32,24 @@ Menu
             sys.exit()
 
     def calculateFee_option(self):
-        monto = float(input("Monto a pagar: "))
-        tasa = float(input("Tasa actual: "))
-        cuotas = int(input("Cúantas cuotas pagará el monto: "))
-        print(f"Total interests: {Payment.CreditCardPayment.calculateFee(monto,tasa,cuotas)}")
+        amount = float(input("Monto a pagar: "))
+        rate = float(input("Tasa actual: "))
+        pay = int(input("Cúantas cuotas pagará el monto: "))
+        print(f"Total interests: {Payment.CreditCardPayment.calculateFee(amount, rate, pay)}")
         self.election_option()
         
     def amortizacion_option(self):
-        monto = float(input("Monto a pagar: "))
-        tasa = float(input("Tasa actual: "))
-        cuotas = int(input("Cúantas cuotas pagará el monto: "))
-        print(Amortizacion.CreditCardAmortizacion.amortizacion(monto,tasa,cuotas))
+        amount = float(input("Monto a pagar: "))
+        rate = float(input("Tasa actual: "))
+        pay = int(input("Cúantas cuotas pagará el monto: "))
+        print(Amortizacion.CreditCardAmortizacion.amortizacion(amount, rate, pay))
         self.election_option()
         
     def extra_bonus_option(self):
-        monto = float(input("Monto a pagar: "))
-        tasa = float(input("Tasa actual: "))
-        cuotas = int(input("Cúantas cuotas pagará el monto: "))
-        numero_cuota_a_abonar = int(input("Qué cuota va a hacer un abono extra: "))
-        abonoextra = float(input("Cúanto será el abono extra: "))
-        print(ExtraBonus.CreditCardExtraBonus.extra_bonus(monto,tasa,cuotas,numero_cuota_a_abonar,abonoextra))
+        amount = float(input("Monto a pagar: "))
+        rate = float(input("Tasa actual: "))
+        pay = int(input("Cúantas cuotas pagará el monto: "))
+        number_pay_of_bonus = int(input("Qué cuota va a hacer un abono extra: "))
+        extrabonus = float(input("Cúanto será el abono extra: "))
+        print(ExtraBonus.CreditCardExtraBonus.extra_bonus(amount, rate, pay, number_pay_of_bonus, extrabonus ))
         self.election_option()

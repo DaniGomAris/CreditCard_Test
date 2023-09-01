@@ -4,53 +4,53 @@ from abc import ABC
 
 class CreditCardExtraBonus(ABC):
 
-    def interes_total(monto,tasa,cuotas):
-        valor_cuota = Payment.CreditCardPayment.calculateFee(monto, tasa, cuotas)
-        total_intereses = (valor_cuota * cuotas) - monto
-        return total_intereses
+    def total_interests(amount: float, rate: float ,pay: int):
+        quota_value = Payment.CreditCardPayment.calculateFee(amount, rate, pay)
+        total_interests = (quota_value * pay) - amount
+        return total_interests
 
-    def extra_bonus(monto, tasa, cuotas,numero_cuota_a_abonar,abonoextra):
-        valor_cuota = Payment.CreditCardPayment.calculateFee(monto, tasa, cuotas)
-        print(valor_cuota)
-        interes_x = tasa/100
-        saldo = monto
-        tabla_amortizacion = [["Cuota", "Saldo", "Pago interés", "Abono capital"], ["#", valor_cuota, tasa, monto]]
-        if cuotas == 1:
-            numero_cuota = 1
-            interes = (tasa * saldo) / 100
-            abono_capital = valor_cuota - interes
-            fila = [numero_cuota, saldo, interes, abono_capital]
-            tabla_amortizacion.append(fila)
+    def extra_bonus(amount: float, rate: float , pay: int, number_pay_of_bonus: int, abonoextra: float):
+        quota_value = Payment.CreditCardPayment.calculateFee(amount, rate, pay)
+        print(quota_value)
+        interests_x = rate/100
+        balance = amount
+        amortization_table = [["Cuota", "balance", "Pago interés", "Abono capital"], ["#", quota_value, rate, amount]]
+        if pay == 1:
+            pay_number = 1
+            interests = (rate * balance) / 100
+            abono_capital = quota_value - interests
+            row = [pay_number, balance, interests, abono_capital]
+            amortization_table.append(row)
         else:
-            for cuota in range(1, cuotas + 1):
-                if saldo <=0:
+            for cuota in range(1, pay + 1):
+                if balance <=0:
                     break
 
-                numero_cuota = cuota
-                interes = interes_x * saldo
+                pay_number = cuota
+                interests = interests_x * balance
 
-                if numero_cuota_a_abonar == numero_cuota:
+                if number_pay_of_bonus == pay_number:
                     cuota_real_a_abonar = abonoextra
                 else:
-                    cuota_real_a_abonar = valor_cuota
+                    cuota_real_a_abonar = quota_value
             
-                abono_capital = cuota_real_a_abonar - interes
-                saldo -= abono_capital
-                
+                abono_capital = cuota_real_a_abonar - interests
+                balance -= abono_capital
+
                 if abonoextra < cuota_real_a_abonar:
                     raise Exceptions.LowBonus
                 
-                if abonoextra > saldo:
+                if abonoextra > balance:
                     raise Exceptions.HighBonus
 
-                if saldo < 0:
-                    abono_capital += saldo + interes
-                    saldo = 0
+                if balance < 0:
+                    abono_capital += balance + interests
+                    balance = 0
 
-                fila = [numero_cuota, saldo, interes, abono_capital]
-                tabla_amortizacion.append(fila)
+                row = [pay_number, balance, interests, abono_capital]
+                amortization_table.append(row)
 
-            if saldo < abono_capital:
-                    abono_capital = saldo
+            if balance < abono_capital:
+                    abono_capital = balance
 
-        return tabla_amortizacion
+        return amortization_table

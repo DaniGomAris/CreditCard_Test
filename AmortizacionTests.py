@@ -5,29 +5,42 @@ import Exceptions
 class AmortizationPlanTest(unittest.TestCase):
     
     def only_fee(self):
-        monto = 90000
-        tasa = 2.4
-        cuotas = 1
+        amount = 90000
+        rate = 2.4
+        pay = 1
+        result = Amortizacion.CreditCardAmortizacion.amortizacion(amount, rate, pay)
 
+        self.assertEqual(pay, round(result,2))
+        
     def normal_case(self):
-        monto = 9297
-        tasa = 3.1
-        cuotas = 36
+        amount = 9297
+        rate = 3.1
+        pay = 36
+        result = Amortizacion.CreditCardAmortizacion.amortizacion(amount, rate, pay)
+
+        self.assertEqual(pay, round(result,2))
 
     def normal_case_2(self):
-        monto = 52377
-        tasa = 3.4
-        cuotas = 24
+        amount = 52377
+        rate = 3.4
+        pay = 24
+        result = Amortizacion.CreditCardAmortizacion.amortizacion(amount, rate, pay)
+
+        self.assertEqual(pay, round(result,2))
 
     def zero_rate(self):
-        monto = 10000
-        tasa = 0
-        cuotas = 48
+        amount = 10000
+        rate = 0
+        pay = 48
+
+        self.assertRaises(Exceptions.ZeroRate, Amortizacion.CreditCardAmortizacion.amortizacion, amount, rate, pay)
 
     def usura(self):
-        monto = 6205
-        tasa = 12.4
-        cuotas = 60
+        amount = 6205
+        rate = 12.4
+        pay = 60
+
+        self.assertRaises(Exceptions.ExcessiveRate, Amortizacion.CreditCardAmortizacion.amortizacion, amount, rate, pay)
 
 if __name__ == '__main__':
     unittest.main()

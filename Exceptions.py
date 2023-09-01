@@ -13,5 +13,8 @@ class LowBonus(Exception):
 class HighBonus(Exception):
     pass
 
-class Late_fee(Exception):
+class Latefee(Exception):
+    pass
+
+class ZeroRate(Exception):
     pass

@@ -1,13 +1,13 @@
-import Payment
+from Payment import Payment
 import Exceptions
-from abc import ABC
 
-class CreditCardExtraBonus(ABC):
+class CreditCardExtraBonus:
 
     def total_interests(amount: float, rate: float ,pay: int):
         quota_value = Payment.CreditCardPayment.calculateFee(amount, rate, pay)
         total_interests = (quota_value * pay) - amount
         return total_interests
+
 
     def extra_bonus(amount: float, rate: float , pay: int, number_pay_of_bonus: int, abonoextra: float):
         quota_value = Payment.CreditCardPayment.calculateFee(amount, rate, pay)

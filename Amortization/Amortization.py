@@ -1,12 +1,12 @@
-import Payment
-from abc import ABC
+from Payment import Payment
 
-class CreditCardAmortizacion(ABC):
+class CreditCardAmortizacion:
 
     def total_Interest(amount: float, rate: float ,pay: int):
         payment_value = Payment.CreditCardPayment.calculateFee(amount, rate, pay)
         total_interests = (payment_value * pay) - amount
         return total_interests
+
 
     def amortizacion(amount: float, rate: float ,pay: int):
         payment_value = Payment.CreditCardPayment.calculateFee(amount, rate, pay)

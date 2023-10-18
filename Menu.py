@@ -1,10 +1,9 @@
-import Payment
-import Amortizacion
-import ExtraBonus
+from Payment import Payment
+from Amortization import Amortization
+from ExtraBonus import ExtraBonus
 import sys
-from abc import ABC
 
-class MenuConsole(ABC):
+class MenuConsole:
     
     def menu_option(self):
         print("""
@@ -31,6 +30,7 @@ Menu
         if eleccion == 4:
             sys.exit()
 
+
     def calculateFee_option(self):
         amount = float(input("Monto a pagar: "))
         rate = float(input("Tasa actual: "))
@@ -38,12 +38,14 @@ Menu
         print(f"Total interests: {Payment.CreditCardPayment.calculateFee(amount, rate, pay)}")
         self.election_option()
         
+
     def amortizacion_option(self):
         amount = float(input("Monto a pagar: "))
         rate = float(input("Tasa actual: "))
         pay = int(input("Cúantas cuotas pagará el monto: "))
-        print(Amortizacion.CreditCardAmortizacion.amortizacion(amount, rate, pay))
+        print(Amortization.CreditCardAmortizacion.amortizacion(amount, rate, pay))
         self.election_option()
+   
         
     def extra_bonus_option(self):
         amount = float(input("Monto a pagar: "))

@@ -1,4 +1,5 @@
 import unittest
+
 import ExtraBonus
 import Exceptions
 
@@ -14,6 +15,7 @@ class BonusEffectTest(unittest.TestCase):
 
         self.assertEqual(pay, round(result,2))
 
+
     def normal_case_2(self):
         amount = 850000
         rate = 3.4
@@ -24,6 +26,7 @@ class BonusEffectTest(unittest.TestCase):
 
         self.assertEqual(pay, round(result,2))
 
+
     def low_bonus_error(self):
         amount = 850000
         rate = 3.4
@@ -32,6 +35,7 @@ class BonusEffectTest(unittest.TestCase):
         extrabonus = 45000
 
         self.assertRaises(Exceptions.LowBonus, ExtraBonus.CreditCardExtraBonus.extra_bonus, amount, rate, pay, number_pay_of_bonus, extrabonus)
+
 
     def late_fee_error(self):
         amount = 850000
